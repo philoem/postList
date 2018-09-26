@@ -6,5 +6,32 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'postList';
+
+ 
+
+  posts = [
+    {
+      title:'Mon premier post',
+      status: '',
+      loveIts: 0
+    },
+    {
+      title:'Mon deuxième post',
+      status: '',
+      loveIts: 0
+    },
+    {
+      title:'Encore un post',
+      status: '',
+      loveIts: 0
+    }
+  ];
+  
+  constructor() {
+   
+  }
+
+  
+  
+
 }
