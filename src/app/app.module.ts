@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { PostComponent } from './post/post.component';
+//import { PostComponent } from './post/post.component';
 import { HeaderComponent } from './header/header.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
 import { PostFormComponent } from './posts-list/post-form/post-form.component';
@@ -19,8 +19,8 @@ import { SinglePostComponent } from './posts-list/single-post/single-post.compon
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
   { path: 'auth/signin', component: SigninComponent },
-  { path: 'post', component: PostsListComponent },
-  { path: 'post/new', canActivate: [AuthGuardService],component: PostFormComponent },
+  { path: 'post', canActivate: [AuthGuardService], component: PostsListComponent },
+  { path: 'post/new', canActivate: [AuthGuardService], component: PostFormComponent },
   { path: 'post/view/:id', canActivate: [AuthGuardService],component: SinglePostComponent },
   { path: '', redirectTo: 'post', pathMatch: 'full' },
   { path: '**', redirectTo: 'post' }
@@ -30,7 +30,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostComponent,
+    //PostComponent,
     HeaderComponent,
     PostsListComponent,
     PostFormComponent,

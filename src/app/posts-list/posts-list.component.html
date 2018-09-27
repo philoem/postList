@@ -1,12 +1,31 @@
 <div class="row">
   <div class="col-sm-8 col-sm-offset-2">
-
-      <h2>Posts</h2>
-
+      <h1 class="list-group-item-heading">Les derniers posts</h1>
       <ul class="list-group">
-        <app-post *ngFor="let post of posts" [postTitle]="post.title"  ></app-post>
+        <div *ngFor="let post of posts"   >
+          <button class="btn btn-danger pull-right" (click)="onDeletePost(post)">Effacer le post 
+          </button>
+          <li [ngClass]="{'list-group-item': true,
+          'list-group-item-success': loveIts >= '1',
+          'list-group-item-danger': loveIts <= '-1'}">
+          
+            <p class="text-right-xs">Publié le :{{ lastUpdate | date: 'EEEE d MMMM y à hh:mm a' }}</p>
+            <h3 [ngStyle]="{color: getColor()}">{{ post.title }}</h3>
+            
+            <p>{{ post.content }}</p>
+            
+            <button class="btn btn-success" 
+                (click)="love()">Love it</button>
+            <button class="btn btn-danger" 
+                (click)="noLove()">Don't love it</button>
+            <button class="btn btn-danger pull-right" (click)="onDeletePost(post)">
+                Effacer ce post
+            </button>
+          </li>
+        </div>
       </ul>
-           
-    
+      <button class="btn btn-primary" (click)="onNewPost()">Nouveau post</button>
   </div>
 </div>
+
+
