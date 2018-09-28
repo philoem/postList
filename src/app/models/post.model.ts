@@ -1,10 +1,9 @@
 export class Post {
 
-    date: any;
+    date = Date();
         
     constructor(public title: string, public content: string) {
-
-        this.date = Date.now();
+       
         
     }
 

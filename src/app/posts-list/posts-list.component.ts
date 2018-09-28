@@ -15,8 +15,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
   @Input() postStatus: string;
   @Input() loveIts: number= 0;
   
-  lastUpdate = Date.now();
-
   posts: Post[];
   postsSubscription: Subscription;
 
@@ -31,6 +29,25 @@ export class PostsListComponent implements OnInit, OnDestroy {
     );
     this.postsService.getPosts();
     this.postsService.emitPosts();
+  }
+
+  /** Méthode qui incrémente le bouton "love it"  */
+  love() {
+    this.loveIts += 1;
+  }
+
+  /** Méthode qui décrémente le bouton "no love it"  */
+  noLove() {
+    this.loveIts -= 1;
+  }
+
+  /** Méthode qui change la couleur du titre du post  */
+  getColor() {
+    if(this.loveIts > 0) {
+      return this.postStatus = 'green';
+    } else if(this.loveIts < 0) {
+      return this.postStatus = 'red';
+    }
   }
 
   onNewPost() {
@@ -49,32 +66,6 @@ export class PostsListComponent implements OnInit, OnDestroy {
     this.postsSubscription.unsubscribe();
   }
 
-  /** Méthode qui incrémente le bouton "love it"  */
-  love() {
-
-    this.loveIts += 1;
-
-  }
-
-  /** Méthode qui décrémente le bouton "no love it"  */
-  noLove() {
-
-    this.loveIts -= 1;
-
-  }
-
-  /** Méthode qui change la couleur du titre du post  */
-  getColor() {
-    
-    if(this.loveIts > 0) {
-
-      return this.postStatus = 'green';
-
-    } else if(this.loveIts < 0) {
-
-      return this.postStatus = 'red';
-    }
-
-  }
+  
 
 }

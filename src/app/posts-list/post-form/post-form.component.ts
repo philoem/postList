@@ -15,7 +15,9 @@ export class PostFormComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private postService: PostService,
-    private router: Router) { }
+    private router: Router) {
+      
+    }
 
   ngOnInit() {
     this.initForm();
@@ -24,14 +26,16 @@ export class PostFormComponent implements OnInit {
   initForm() {
     this.postForm = this.formBuilder.group({
       title: ['', Validators.required],
-      content: ['', Validators.required]
+      content: ['', Validators.required],
+      date: ['', Validators]
     });
   }
 
   onSavePost() {
     const title = this.postForm.get('title').value;
     const content = this.postForm.get('content').value;
-    const newPost = new Post(title, content);
+    const date = this.postForm.get('date').value;
+    const newPost = new Post(title, content, date);
     
     this.postService.createNewPost(newPost);
     this.router.navigate(['/post']);

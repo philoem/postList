@@ -3,13 +3,13 @@
       <h1 class="list-group-item-heading">Les derniers posts</h1>
       <ul class="list-group">
         <div *ngFor="let post of posts"   >
-          <button class="btn btn-danger pull-right" (click)="onDeletePost(post)">Effacer le post 
+          <button class="btn btn-danger pull-right" (click)="onDeletePost(post)">Supprimer le post 
           </button>
           <li [ngClass]="{'list-group-item': true,
           'list-group-item-success': loveIts >= '1',
           'list-group-item-danger': loveIts <= '-1'}">
           
-            <p class="text-right-xs">Publié le :{{ lastUpdate | date: 'EEEE d MMMM y à hh:mm a' }}</p>
+            <p class="text-right-xs">Publié le :{{ post.date | date: 'EEEE d MMMM y à hh:mm a' }}</p>
             <h3 [ngStyle]="{color: getColor()}">{{ post.title }}</h3>
             
             <p>{{ post.content }}</p>

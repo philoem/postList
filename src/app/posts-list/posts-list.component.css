@@ -3,6 +3,9 @@
 {
     font-style: italic;
     text-align: right;
-    
-   
+}
+/* Espace entre les 2 boutons "Love it" et "Don't love it" */
+button
+{
+    margin: 1px;
 }
