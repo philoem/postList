@@ -8,26 +8,10 @@ import * as firebase from 'firebase';
 })
 export class AppComponent {
 
-  posts = [
-    {
-      title:'Mon premier post',
-      status: '',
-      loveIts: 0
-    },
-    {
-      title:'Mon deuxième post',
-      status: '',
-      loveIts: 0
-    },
-    {
-      title:'Encore un post',
-      status: '',
-      loveIts: 0
-    }
-  ];
+  posts: any[];
   
   constructor() {
-    var config = {
+    const config = {
       apiKey: "AIzaSyBPRWszjAULS9xz1lhqWL-IJF4buz2FZpw",
       authDomain: "postlist-d1baf.firebaseapp.com",
       databaseURL: "https://postlist-d1baf.firebaseio.com",
@@ -37,9 +21,6 @@ export class AppComponent {
     };
     firebase.initializeApp(config);
   }
- 
-
-  
   
 
 }

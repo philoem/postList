@@ -1,19 +1,35 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Post } from '../models/post.model';
 import { Subject } from 'rxjs';
 import * as firebase from 'firebase';
+import { HttpClient } from '@angular/common/http';
+//import { PostsComponent } from '../posts-list/posts/posts.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
-
+  
   posts: Post[] = [];
   postsSubject = new Subject<Post[]>();
-  
-  constructor() {
-    //this.getPosts();
-   }
+    
+  constructor(private httpClient: HttpClient) {
+    this.getPosts();
+  }
+  emitPostSubject() {
+    this.postsSubject.next(this.posts.slice());
+  }
+
+  /** Méthode qui incrémente le bouton "love it"  */
+  love(i: number) {
+    this.posts[i].loveIts += 1;
+    this.savePosts();
+  }
+  /** Méthode qui décrémente le bouton "no love it"  */
+  noLove(i: number) {
+    this.posts[i].loveIts -= 1;
+    this.savePosts();
+  }
 
   emitPosts() {
     this.postsSubject.next(this.posts);
@@ -30,20 +46,6 @@ export class PostService {
           this.emitPosts();
         }
       );
-  }
-
-  getSinglePost(id: number) {
-    return new Promise(
-      (resolve, reject) => {
-        firebase.database().ref('/posts/' + id).once('value').then(
-          (data) => {
-            resolve(data.val());
-          }, (error) => {
-            reject(error);
-          }
-        );
-      }
-    );
   }
 
   createNewPost(newPost: Post) {
@@ -64,6 +66,20 @@ export class PostService {
     this.savePosts();
     this.emitPosts();
   }
+
+  getPostsFromServer() {
+    this.httpClient
+    .get<any[]>('https://postlist-d1baf.firebaseio.com/posts.json')
+    .subscribe(
+        (response) => {
+            this.posts = response;
+            this.emitPostSubject();
+        },
+        (error) => {
+            console.log('Erreur de chargement' + error);
+        }
+    )
+}
 
   
 

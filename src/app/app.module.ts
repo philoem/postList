@@ -13,6 +13,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './auth/signup/signup.component';
 import { SigninComponent } from './auth/signin/signin.component';
+import { PostsComponent } from './posts-list/posts/posts.component';
 
 const appRoutes: Routes = [
   { path: 'auth/signup', component: SignupComponent },
@@ -32,6 +33,7 @@ const appRoutes: Routes = [
     PostFormComponent,
     SignupComponent,
     SigninComponent,
+    PostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,13 +41,11 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes)
-
   ],
   providers: [
     AuthService,
     PostService,
     AuthGuardService
-
   ],
   bootstrap: [AppComponent]
 })
